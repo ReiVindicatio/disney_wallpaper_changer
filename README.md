@@ -17,8 +17,11 @@ cd disney_wallpaper_changer
 ```
 
 2. cron の有効化
+
 システム設定 > プライバシーとセキュリティ > フルディスクアクセス > +
+
 cmd + shift + G で検索を開き、 /usr/sbin/cron を開く
+
 一覧に cron があればok
 
 3. 定期実行の設定
@@ -32,6 +35,7 @@ crontab -e
 0 * * * * /path/to/repository/disney_wallpaper_changer/disney_wallpaper_changer/target/release/disney_wallpaper_changer
 ```
 `/path/to/...` の部分は適宜変える 
+
 :wq で vim を閉じると色々許可を求められるので許可する。
 
 毎時間実行するのは、PCスリープ時にはcronの処理が走らないため。（壁紙取得済みなら処理は全てskipされる）
