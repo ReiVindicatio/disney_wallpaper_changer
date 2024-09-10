@@ -1,0 +1,1 @@
+/Users/MasatoSaito/dev/disney_wallpaper_changer/disney_wallpaper_changer/target/debug/disney_wallpaper_changer: /Users/MasatoSaito/dev/disney_wallpaper_changer/disney_wallpaper_changer/src/main.rs
