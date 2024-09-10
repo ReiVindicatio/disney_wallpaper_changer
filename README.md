@@ -27,8 +27,11 @@ cmd から crontab を開く
 crontab -e
 ```
 
-定期実行の処理を入れる　毎月1日実行なら
+定期実行の処理を入れる。毎時間実行なら
 ```vim
-0 0 1 * * /path/to/repository/disney_wallpaper_changer/disney_wallpaper_changer/target/release/disney_wallpaper_changer
+0 * * * * /path/to/repository/disney_wallpaper_changer/disney_wallpaper_changer/target/release/disney_wallpaper_changer
 ```
 `/path/to/...` の部分は適宜変える 
+:wq で vim を閉じると色々許可を求められるので許可する。
+
+毎時間実行するのは、PCスリープ時にはcronの処理が走らないため。（壁紙取得済みなら処理は全てskipされる）

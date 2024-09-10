@@ -1,3 +1,5 @@
+use std::{fs, path::Path};
+
 use chrono::{DateTime, Datelike, Local};
 use reqwest;
 
@@ -28,15 +30,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let local: DateTime<Local> = Local::now();
     let year = local.year();
     let month = local.month();
+    let year_month = format!("{:04}{:02}", year, month);
 
     let url = format!(
         "https://media2.tokyodisneyresort.jp/home/tdr/wallpaper{}/{}/wallpaper_{}_1.jpg",
-        year, month, format!("{:04}{:02}", year, month)
+        year, month, year_month
     );
 
     let home_dir = std::env::var("HOME").expect("Could not retrieve home directory");
-    let wallpaper_path = format!("{}/Downloads/wallpaper.jpg", home_dir);
+    let wallpaper_dir = format!("{}/Downloads/wallpaper", home_dir);
+    let wallpaper_path = format!("{}/wallpaper{}.jpg", wallpaper_dir, year_month);
 
+    if fs::metadata(&wallpaper_path).is_ok() {
+        return Ok(());
+    }
+
+    if !Path::new(&wallpaper_dir).exists() {
+        fs::create_dir_all(&wallpaper_dir)?;
+    }
     download_wallpaper(url, &wallpaper_path).await?;
     set_wallpaper(&wallpaper_path)?;
 
